@@ -1,0 +1,29 @@
+{
+  "name": "mwsdk-phonegap-plugin",
+  "version": "1.0.0",
+  "description": "Manatee Works Barcode Scanner Plugin",
+  "cordova": {
+    "id": "mwsdk-phonegap-plugin",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cognex-ID/mwsdk-phonegap-plugin.git"
+  },
+  "keywords": [
+    "phonegap",
+    "barcode",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "author": "Cognex",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://cmbdn.cognex.com/tickets"
+  },
+  "homepage": "https://github.com/Cognex-ID/mwsdk-phonegap-plugin.git#readme"
+}

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+xmlns:android="http://schemas.android.com/apk/res/android"
+id="mwsdk-phonegap-plugin"
+version="1.0.0">
+<name>MWBarcodeScanner</name>
+<description>Manatee Works Barcode Scanner Plugin</description>
+<license>MIT</license>
+<keywords>phonegap,barcode</keywords>
+
+
+<js-module src="www/MWBScanner.js" name="Scanner">
+    <clobbers target="mwbScanner" />
+</js-module>
+<asset src="js/MWBConfig.js" target="js/MWBConfig.js" />
+
+<dependency id="cordova-plugin-dialogs" />
+<dependency id="cordova-plugin-device" />
+<!-- android -->
+<platform name="android">
+    
+<config-file target="res/xml/config.xml" parent="/*">
+<preference name="CrosswalkAnimatable" value="true" />
+ <feature name="MWBarcodeScanner">
+	<param name="android-package" value="com.manateeworks.BarcodeScannerPlugin"/>
+ </feature>
+ </config-file>
+
+
+ <config-file target="AndroidManifest.xml" parent="/manifest/application">
+ 
+ <activity android:name="com.manateeworks.ScannerActivity"
+ android:configChanges="screenLayout|screenSize|keyboardHidden"
+ android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+ </activity>
+ </config-file>
+ 
+ <config-file target="AndroidManifest.xml" parent="/manifest">
+ <uses-permission android:name="android.permission.CAMERA" />
+ <uses-permission android:name="android.permission.INTERNET" />
+
+ </config-file>
+ 
+ 
+ <lib-file src="src/android/libs/mwbscanner.jar" />
+ 
+ <!-- For cordova-android 7.x -->
+ <resource-file src="src/android/src/com/manateeworks/BarcodeScannerPlugin.java" target="java/com/manateeworks/BarcodeScannerPlugin.java" />
+ <resource-file src="src/android/src/com/manateeworks/ScannerActivity.java" target="java/com/manateeworks/ScannerActivity.java" />
+
+ <!-- For cordova-android 6.x -->
+ <resource-file src="src/android/src/com/manateeworks/BarcodeScannerPlugin.java" target="src/com/manateeworks/BarcodeScannerPlugin.java" />
+ <resource-file src="src/android/src/com/manateeworks/ScannerActivity.java" target="src/com/manateeworks/ScannerActivity.java" />
+ 
+ <resource-file src="src/android/res/layout/scanner.xml" target="res/layout/scanner.xml" />
+ <resource-file src="src/android/res/drawable/overlay_mw.png" target="res/drawable/overlay_mw.png" />
+ <resource-file src="src/android/res/drawable-hdpi/overlay_mw.png" target="res/drawable-hdpi/overlay_mw.png" />
+ <resource-file src="src/android/res/drawable/flashbuttonoff.png" target="res/drawable/flashbuttonoff.png" />
+ <resource-file src="src/android/res/drawable/flashbuttonon.png" target="res/drawable/flashbuttonon.png" />
+ <resource-file src="src/android/res/drawable/zoom.png" target="res/drawable/zoom.png" />
+
+ <!-- For cordova-android 6.x -->
+ <resource-file src="src/android/libs/x86/libBarcodeScannerLib.so" target="libs/x86/libBarcodeScannerLib.so" />
+ <resource-file src="src/android/libs/armeabi-v7a/libBarcodeScannerLib.so" target="libs/armeabi-v7a/libBarcodeScannerLib.so" />
+ <resource-file src="src/android/libs/arm64-v8a/libBarcodeScannerLib.so" target="libs/arm64-v8a/libBarcodeScannerLib.so" />
+ <resource-file src="src/android/libs/x86_64/libBarcodeScannerLib.so" target="libs/x86_64/libBarcodeScannerLib.so" />
+
+ <!-- For cordova-android 7.x -->
+ <resource-file src="src/android/libs/x86/libBarcodeScannerLib.so" target="jniLibs/x86/libBarcodeScannerLib.so" />
+ <resource-file src="src/android/libs/armeabi-v7a/libBarcodeScannerLib.so" target="jniLibs/armeabi-v7a/libBarcodeScannerLib.so" />
+ <resource-file src="src/android/libs/arm64-v8a/libBarcodeScannerLib.so" target="jniLibs/arm64-v8a/libBarcodeScannerLib.so" />
+ <resource-file src="src/android/libs/x86_64/libBarcodeScannerLib.so" target="jniLibs/x86_64/libBarcodeScannerLib.so" />
+
+
+ </platform>
+
+<!-- ios -->
+<platform name="ios">
+ 
+    <!-- Camera Usage Description for iOS 10+ -->
+    <config-file target="*-Info.plist" parent="NSCameraUsageDescription">
+        <string>Required for Scanning</string>
+    </config-file>
+
+     <config-file target="config.xml" parent="/*">
+        <feature name="MWBarcodeScanner">
+            <param name="ios-package" value="CDVMWBarcodeScanner" />
+        </feature>
+    </config-file>
+    
+    <framework src="CoreVideo.framework" weak="false" />
+    <framework src="CoreGraphics.framework" weak="false" />
+    <framework src="QuartzCore.framework" weak="false" />
+    <framework src="CoreLocation.framework" weak="false" />
+                   
+   <source-file src="src/ios/MWBarcodeScanner/libBarcodeScanner.a" target-dir="MWBarcodeScanner" framework="true"/>
+    <header-file src="src/ios/CDVMWBarcodeScanner.h" target-dir="MWBarcodeScanner"/>
+    <source-file src="src/ios/CDVMWBarcodeScanner.m" target-dir="MWBarcodeScanner"/>
+    <header-file src="src/ios/MWBarcodeScanner/BarcodeScanner.h" target-dir="MWBarcodeScanner"/>
+    <header-file src="src/ios/MWBarcodeScanner/MWScannerViewController.h" target-dir="MWBarcodeScanner"/>
+    <source-file src="src/ios/MWBarcodeScanner/MWScannerViewController.m" target-dir="MWBarcodeScanner"/>
+    <header-file src="src/ios/MWBarcodeScanner/MWOverlay.h" target-dir="MWBarcodeScanner"/>
+    <source-file src="src/ios/MWBarcodeScanner/MWOverlay.m" target-dir="MWBarcodeScanner"/>
+    <header-file src="src/ios/MWBarcodeScanner/MWResult.h" target-dir="MWBarcodeScanner"/>
+    <source-file src="src/ios/MWBarcodeScanner/MWParser.h" target-dir="MWBarcodeScanner"/>
+    <source-file src="src/ios/MWBarcodeScanner/MWScannerViewController.xib" target-dir="MWBarcodeScanner"/>
+    <resource-file src="src/ios/MWBarcodeScanner/close_button.png" target-dir="MWBarcodeScanner"/>
+    <resource-file src="src/ios/MWBarcodeScanner/flashbuttonon.png" target-dir="MWBarcodeScanner"/>
+    <resource-file src="src/ios/MWBarcodeScanner/flashbuttonoff.png" target-dir="MWBarcodeScanner"/>
+    <resource-file src="src/ios/MWBarcodeScanner/overlay_mw.png" target-dir="MWBarcodeScanner"/>
+    <resource-file src="src/ios/MWBarcodeScanner/overlay_mw@2x.png" target-dir="MWBarcodeScanner"/>
+    <resource-file src="src/ios/MWBarcodeScanner/zoom.png" target-dir="MWBarcodeScanner"/>
+    
+</platform>
+
+
+</plugin>
